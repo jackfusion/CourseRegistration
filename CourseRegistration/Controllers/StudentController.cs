@@ -37,7 +37,6 @@ namespace CourseRegistration.Controllers
                 })
                 .Select(s => _mapper.Map(s))
                 .ToList();
-
             return View(student);
         }
 

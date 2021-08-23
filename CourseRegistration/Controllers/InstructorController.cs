@@ -29,8 +29,7 @@ namespace CourseRegistration.Controllers
             var instructor = _instructorRepo.GetAllInstructors()
                 .Select(c =>
                 {
-                    c.Course = course
-                                    .Where(i => i.C_Id == c.C_Id)
+                    c.Course = course.Where(i => i.C_Id == c.C_Id)
                                     .FirstOrDefault() ?? new Models.Course
                                     {
                                         Name = "n/a"
@@ -60,7 +59,6 @@ namespace CourseRegistration.Controllers
             var list = _coursesRepo.GetAllCourses()
                 .Select(i => _mapper.Map(i))
                 .ToList();
-
             ViewBag.Courses = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
             return View();
         }
