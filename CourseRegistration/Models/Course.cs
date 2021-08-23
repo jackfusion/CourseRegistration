@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CourseRegistration.Models
 {
-    public class Courses
+    public class Course
     {
         [Key]
         public int C_Id { get; set; }

@@ -8,10 +8,10 @@ namespace CourseRegistration.Data.Interfaces
 {
     public interface ICourseRepo
     {
-        IEnumerable<Courses> GetAllCourses();
-        Courses GetCoursesByID(int id);
-        void CreateCourse(Courses input);
-        void UpdateCourse(Courses input);
+        IEnumerable<Course> GetAllCourses();
+        Course GetCoursesByID(int id);
+        void CreateCourse(Course input);
+        void UpdateCourse(Course input);
         bool SaveChanges();
     }
 }

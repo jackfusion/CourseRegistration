@@ -1,5 +1,6 @@
 ﻿using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
+using CourseRegistration.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,25 +10,26 @@ namespace CourseRegistration.Data.MockRepo
 {
     public class MockInstructorRepo : IInstructorRepo
     {
-        private readonly static List<Instructors> _instructors = new List<Instructors>
+        private readonly static List<Instructor> _instructors = new List<Instructor>
         {
-            new Instructors { I_Id = 001, FirstName = "Jack", LastName = "Smith", EmailAddress = "jacksmith@mail.com", C_Id = 001},
-            new Instructors { I_Id = 002, FirstName = "Luck", LastName = "Hairy", EmailAddress = "luckhairy@mail.com", C_Id = 002},
-            new Instructors { I_Id = 003, FirstName = "Darrick", LastName = "Dark", EmailAddress = "darrickdark@mail.com", C_Id = 003},
+            new Instructor { I_Id = 001, FirstName = "Jack", LastName = "Smith", EmailAddress = "jacksmith@mail.com", C_Id = 001},
+            new Instructor { I_Id = 002, FirstName = "Luck", LastName = "Hairy", EmailAddress = "luckhairy@mail.com", C_Id = 002},
+            new Instructor { I_Id = 003, FirstName = "Darrick", LastName = "Dark", EmailAddress = "darrickdark@mail.com", C_Id = 003},
         };
 
-        public void CreateInstructor(Instructors input)
+        public void CreateInstructor(Instructor input)
         {
             int code = _instructors.Max(i => i.I_Id) + 1;
             input.I_Id = code;
             _instructors.Add(input);
         }
-        public IEnumerable<Instructors> GetAllInstructors()
+
+        public IEnumerable<Instructor> GetAllInstructors()
         {
             return _instructors;
         }
 
-        public Instructors GetInstructorsById(int id)
+        public Instructor GetInstructorsById(int id)
         {
             return _instructors.FirstOrDefault(i => i.I_Id == id);
         }
@@ -37,7 +39,7 @@ namespace CourseRegistration.Data.MockRepo
             return true;
         }
 
-        public void UpdateInstructor(Instructors input)
+        public void UpdateInstructor(Instructor input)
         {
             var itemInTheList = _instructors.FirstOrDefault(i => i.I_Id == input.I_Id);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseRegistration.ModelsDto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,15 +9,17 @@ using System.Threading.Tasks;
 
 namespace CourseRegistration.Models
 {
-    public class Instructors
+    public class Student
     {
         [Key]
-        public int I_Id { get; set; }
+        public int S_Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        [ForeignKey("Courses")]
+        public string PhoneNumber { get; set; }
+        //[Column(TypeName = "longtext")]
+        [ForeignKey("Course")]
         public int? C_Id { get; set; }
-        public Courses Course { get; set; }
+        public Course Course { get; set; }
     }
 }

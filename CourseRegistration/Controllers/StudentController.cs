@@ -24,12 +24,12 @@ namespace CourseRegistration.Controllers
         }
         public IActionResult Index()
         {
-            var courses = _coursesRepo.GetAllCourses();
-            var students = _studentRepo.GetAllStudents()
+            var course = _coursesRepo.GetAllCourses();
+            var student = _studentRepo.GetAllStudents()
                 .Select(c =>
                 {
-                    c.Courses = courses.Where(s => s.C_Id == c.C_Id)
-                                       .FirstOrDefault() ?? new Models.Courses
+                    c.Course = course.Where(s => s.C_Id == c.C_Id)
+                                       .FirstOrDefault() ?? new Models.Course
                                        {
                                            Name = "n/a"
                                        };
@@ -38,7 +38,7 @@ namespace CourseRegistration.Controllers
                 .Select(s => _mapper.Map(s))
                 .ToList();
 
-            return View(students);
+            return View(student);
         }
 
         public IEnumerable<string> GetStudentsByS_Id(int? id)
@@ -61,7 +61,7 @@ namespace CourseRegistration.Controllers
                 .Select(s => _mapper.Map(s))
                 .ToList();
             ViewBag.Courses = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
-            return View(list);
+            return View();
         }
 
         public ActionResult Edit(int id)

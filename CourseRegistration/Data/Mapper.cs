@@ -9,9 +9,9 @@ namespace CourseRegistration.Data
 {
     public class Mapper
     {
-        public Courses Map(CourseDto input)
+        public Course Map(CourseDto input)
         {
-            return new Courses
+            return new Course
             {
                 C_Id = input.C_Id,
                 Number = input.Number,
@@ -20,7 +20,7 @@ namespace CourseRegistration.Data
             };
         }
 
-        public CourseDto Map(Courses input)
+        public CourseDto Map(Course input)
         {
             return new CourseDto
             {
@@ -31,9 +31,9 @@ namespace CourseRegistration.Data
             };
         }
 
-        public Students Map(StudentDto input)
+        public Student Map(StudentDto input)
         {
-            return new Students
+            return new Student
             {
                 S_Id = input.S_Id,
                 FirstName = input.FirstName,
@@ -44,7 +44,7 @@ namespace CourseRegistration.Data
             };
         }
 
-        public StudentDto Map(Students input)
+        public StudentDto Map(Student input)
         {
             return new StudentDto
             {
@@ -54,13 +54,13 @@ namespace CourseRegistration.Data
                 EmailAddress = input.EmailAddress,
                 PhoneNumber = input.PhoneNumber,
                 C_Id = input.C_Id,
-                Course = Map(input.Courses)
+                Course = Map(input.Course)
             };
         }
 
-        public Instructors Map(InstructorDto input)
+        public Instructor Map(InstructorDto input)
         {
-            return new Instructors
+            return new Instructor
             {
                 I_Id = input.I_Id,
                 FirstName = input.FirstName,
@@ -69,7 +69,7 @@ namespace CourseRegistration.Data
                 C_Id = input.C_Id
             };
         }
-        public InstructorDto Map(Instructors input)
+        public InstructorDto Map(Instructor input)
         {
             return new InstructorDto
             {

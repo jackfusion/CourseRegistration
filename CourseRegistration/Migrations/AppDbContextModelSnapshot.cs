@@ -17,7 +17,7 @@ namespace CourseRegistration.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.9");
 
-            modelBuilder.Entity("CourseRegistration.Models.Courses", b =>
+            modelBuilder.Entity("CourseRegistration.Models.Course", b =>
                 {
                     b.Property<int>("C_Id")
                         .ValueGeneratedOnAdd()
@@ -60,16 +60,13 @@ namespace CourseRegistration.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CourseRegistration.Models.Instructors", b =>
+            modelBuilder.Entity("CourseRegistration.Models.Instructor", b =>
                 {
                     b.Property<int>("I_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int?>("C_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CourseC_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("EmailAddress")
@@ -83,7 +80,7 @@ namespace CourseRegistration.Migrations
 
                     b.HasKey("I_Id");
 
-                    b.HasIndex("CourseC_Id");
+                    b.HasIndex("C_Id");
 
                     b.ToTable("Instructors");
 
@@ -114,16 +111,13 @@ namespace CourseRegistration.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CourseRegistration.Models.Students", b =>
+            modelBuilder.Entity("CourseRegistration.Models.Student", b =>
                 {
                     b.Property<int>("S_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("C_Id")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("CourseDtoC_Id")
+                    b.Property<int?>("C_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("EmailAddress")
@@ -142,15 +136,13 @@ namespace CourseRegistration.Migrations
 
                     b.HasIndex("C_Id");
 
-                    b.HasIndex("CourseDtoC_Id");
-
                     b.ToTable("Students");
 
                     b.HasData(
                         new
                         {
                             S_Id = 1,
-                            C_Id = "1",
+                            C_Id = 1,
                             EmailAddress = "jimblack@mail.com",
                             FirstName = "Jim",
                             LastName = "Black",
@@ -159,7 +151,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 2,
-                            C_Id = "2",
+                            C_Id = 2,
                             EmailAddress = "jackwhite@mail.com",
                             FirstName = "Jack",
                             LastName = "White",
@@ -168,7 +160,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 3,
-                            C_Id = "3",
+                            C_Id = 3,
                             EmailAddress = "georgegrey@mail.com",
                             FirstName = "George",
                             LastName = "Grey",
@@ -177,7 +169,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 4,
-                            C_Id = "1",
+                            C_Id = 1,
                             EmailAddress = "jillfusion@mail.com",
                             FirstName = "Jill",
                             LastName = "Fusion",
@@ -186,7 +178,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 5,
-                            C_Id = "1",
+                            C_Id = 1,
                             EmailAddress = "jamblur@mail.com",
                             FirstName = "Jam",
                             LastName = "blur",
@@ -195,7 +187,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 6,
-                            C_Id = "3",
+                            C_Id = 3,
                             EmailAddress = "johnbutt@mail.com",
                             FirstName = "John",
                             LastName = "Butt",
@@ -204,7 +196,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 7,
-                            C_Id = "2",
+                            C_Id = 2,
                             EmailAddress = "maryjo@mail.com",
                             FirstName = "Mary",
                             LastName = "Jo",
@@ -212,49 +204,22 @@ namespace CourseRegistration.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CourseRegistration.ModelsDto.CourseDto", b =>
+            modelBuilder.Entity("CourseRegistration.Models.Instructor", b =>
                 {
-                    b.Property<int>("C_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.HasKey("C_Id");
-
-                    b.ToTable("CourseDto");
-                });
-
-            modelBuilder.Entity("CourseRegistration.Models.Instructors", b =>
-                {
-                    b.HasOne("CourseRegistration.Models.Courses", "Course")
+                    b.HasOne("CourseRegistration.Models.Course", "Course")
                         .WithMany()
-                        .HasForeignKey("CourseC_Id");
+                        .HasForeignKey("C_Id");
 
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("CourseRegistration.Models.Students", b =>
+            modelBuilder.Entity("CourseRegistration.Models.Student", b =>
                 {
-                    b.HasOne("CourseRegistration.Models.Courses", "Courses")
+                    b.HasOne("CourseRegistration.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("C_Id");
 
-                    b.HasOne("CourseRegistration.ModelsDto.CourseDto", "CourseDto")
-                        .WithMany()
-                        .HasForeignKey("CourseDtoC_Id");
-
-                    b.Navigation("CourseDto");
-
-                    b.Navigation("Courses");
+                    b.Navigation("Course");
                 });
 #pragma warning restore 612, 618
         }

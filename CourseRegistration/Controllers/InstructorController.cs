@@ -25,21 +25,21 @@ namespace CourseRegistration.Controllers
         }
         public IActionResult Index()
         {
-            var courses = _coursesRepo.GetAllCourses();
-            var instructors = _instructorRepo.GetAllInstructors()
+            var course = _coursesRepo.GetAllCourses();
+            var instructor = _instructorRepo.GetAllInstructors()
                 .Select(c =>
                 {
-                    c.Course = courses
+                    c.Course = course
                                     .Where(i => i.C_Id == c.C_Id)
-                                    .FirstOrDefault() ?? new Models.Courses
+                                    .FirstOrDefault() ?? new Models.Course
                                     {
                                         Name = "n/a"
                                     };
                     return c;
                 })
-                .Select(s => _mapper.Map(s))
+                .Select(i => _mapper.Map(i))
                 .ToList();
-            return View(instructors);
+            return View(instructor);
         }
 
         public IEnumerable<string> GetInstructorByI_Id(int? id)
@@ -57,31 +57,36 @@ namespace CourseRegistration.Controllers
         }
         public ActionResult Create()
         {
-            var list = _coursesRepo.GetAllCourses().ToList();
+            var list = _coursesRepo.GetAllCourses()
+                .Select(i => _mapper.Map(i))
+                .ToList();
+
             ViewBag.Courses = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
             return View();
         }
 
         public ActionResult Edit(int id)
         {
-            var list = _coursesRepo.GetAllCourses().ToList();
-            ViewBag.Courses = new SelectList(list, nameof(Courses.C_Id), nameof(Courses.Name));
+            var list = _coursesRepo.GetAllCourses()
+                .Select(i => _mapper.Map(i))
+                .ToList();
+            ViewBag.Courses = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
             var i = _instructorRepo.GetInstructorsById(id);
             return View(i);
         }
 
         [HttpPost]
-        public ActionResult Create(Instructors instuctor)
+        public ActionResult Create(Instructor instructor)
         {
-            _instructorRepo.CreateInstructor(instuctor);
+            _instructorRepo.CreateInstructor(_mapper.Map(instructor));
             _instructorRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
-        public ActionResult Edit(Instructors instructor)
+        public ActionResult Edit(InstructorDto instructor)
         {
-            _instructorRepo.UpdateInstructor(instructor);
+            _instructorRepo.UpdateInstructor(_mapper.Map(instructor));
             _instructorRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

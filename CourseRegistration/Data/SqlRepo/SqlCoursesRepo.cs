@@ -15,7 +15,7 @@ namespace CourseRegistration.Data.SqlRepo
         {
             _context = context;
         }
-        public void CreateCourse(Courses input)
+        public void CreateCourse(Course input)
         {
             if (input == null)
             {
@@ -24,12 +24,12 @@ namespace CourseRegistration.Data.SqlRepo
             _context.Courses.Add(input);
         }
 
-        public IEnumerable<Courses> GetAllCourses()
+        public IEnumerable<Course> GetAllCourses()
         {
             return _context.Courses.ToList();
         }
 
-        public Courses GetCoursesByID(int id)
+        public Course GetCoursesByID(int id)
         {
             return _context.Courses.FirstOrDefault(c => c.C_Id == id);
         }
@@ -39,7 +39,7 @@ namespace CourseRegistration.Data.SqlRepo
             return _context.SaveChanges() >= 0;
         }
 
-        public void UpdateCourse(Courses input)
+        public void UpdateCourse(Course input)
         {
             var itemInTheList = _context.Courses.FirstOrDefault(c => c.C_Id == input.C_Id);
 

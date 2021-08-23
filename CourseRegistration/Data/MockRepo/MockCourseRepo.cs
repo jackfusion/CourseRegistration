@@ -9,26 +9,26 @@ namespace CourseRegistration.Data.MockRepo
 {
     public class MockCourseRepo : ICourseRepo
     {
-        private readonly static List<Courses> _courses = new List<Courses>
+        private readonly static List<Course> _courses = new List<Course>
         {
-            new Courses { C_Id = 001, Number = 1, Name = "Math", Description = "Math"},
-            new Courses { C_Id = 002, Number = 2, Name = "Computers", Description = "Teach Web Development"},
-            new Courses { C_Id = 003, Number = 3, Name = "Gym", Description = "Gym"},
+            new Course { C_Id = 001, Number = 1, Name = "Math", Description = "Math"},
+            new Course { C_Id = 002, Number = 2, Name = "Computers", Description = "Teach Web Development"},
+            new Course { C_Id = 003, Number = 3, Name = "Gym", Description = "Gym"},
         };
 
-        public void CreateCourse(Courses input)
+        public void CreateCourse(Course input)
         {
             int code = _courses.Max(c => c.C_Id) + 1;
             input.C_Id = code;
             _courses.Add(input);
         }
 
-        public IEnumerable<Courses> GetAllCourses()
+        public IEnumerable<Course> GetAllCourses()
         {
             return _courses;
         }
 
-        public Courses GetCoursesByID(int id)
+        public Course GetCoursesByID(int id)
         {
             return _courses.FirstOrDefault(c => c.C_Id == id);
         }
@@ -38,7 +38,7 @@ namespace CourseRegistration.Data.MockRepo
             return true;
         }
 
-        public void UpdateCourse(Courses input)
+        public void UpdateCourse(Course input)
         {
             var itemInTheList = _courses.FirstOrDefault(c => c.C_Id == input.C_Id);
 
