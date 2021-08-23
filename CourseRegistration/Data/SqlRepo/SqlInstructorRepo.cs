@@ -1,6 +1,5 @@
 ﻿using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
-using CourseRegistration.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +22,6 @@ namespace CourseRegistration.Data.SqlRepo
                 throw new ArgumentException(nameof(input));
             }
             _context.Instructors.Add(input);
-        }
-
-        public void CreateInstructor(InstructorDto instructorDto)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Instructor> GetAllInstructors()
