@@ -8,19 +8,23 @@ using CourseRegistration.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CourseRegistration.Data;
 using CourseRegistration.ModelsDto;
+using CourseRegistration.ViewModels;
+using CourseRegistration.Data.MockRepo;
 
 namespace CourseRegistration.Controllers
 {
     public class StudentController : Controller
     {
-        private ICourseRepo _coursesRepo;
-        private IStudentRepo _studentRepo;
+        private readonly ICourseRepo _coursesRepo;
+        private readonly IStudentRepo _studentRepo;
+        private readonly ICourseStudentRepo _courseStudentRepo;
         private readonly Mapper _mapper = new Mapper();
 
-        public StudentController(IStudentRepo studentRepo, ICourseRepo courseRepo)
+        public StudentController(IStudentRepo studentRepo, ICourseRepo courseRepo, ICourseStudentRepo courseStudentRepo)
         {
             _coursesRepo = courseRepo;
             _studentRepo = studentRepo;
+            _courseStudentRepo = courseStudentRepo
         }
         public IActionResult Index()
         {
@@ -68,8 +72,8 @@ namespace CourseRegistration.Controllers
             var list = _coursesRepo.GetAllCourses()
                 .Select(s => _mapper.Map(s))
                 .ToList();
-            ViewBag.CourseDto = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
-            var s = _studentRepo.GetStudentsById(id);
+            ViewBag.Course = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
+            var s = _mapper.Map(_studentRepo.GetStudentsById(id));
             return View(s);
         }
 
@@ -87,6 +91,23 @@ namespace CourseRegistration.Controllers
             _studentRepo.UpdateStudent(_mapper.Map(student));
             _studentRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
+        public ActionResult GetCourseByCourseId(int C_Id)
+        {
+            var CorseStudent = _courseStudentRepo.GetAllCourseStudent();
+            var courses = _coursesRepo.GetAllCourses()
+                .Select(c =>
+                    new CourseVM
+                    {
+                        C_Id = c.C_Id,
+                        Name = c.Name,
+                        Description = c.Description,
+                        IsActive = courseStudent
+                        .Where(cs => cs.C_Id == c.C_Id && cs.S_ID == id)
+                        .FirstOrDefault() == null ? false : true
+                    }
+                );
+            return PartialView();
         }
     }
 }

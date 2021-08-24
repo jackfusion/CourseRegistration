@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CourseRegistration.Migrations
 {
-    public partial class FirstIteraltion : Migration
+    public partial class firstInilization : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,6 +82,33 @@ namespace CourseRegistration.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "CourseStudent",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    S_Id = table.Column<int>(type: "int", nullable: false),
+                    I_Id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseStudent", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_CourseStudent_Instructors_I_Id",
+                        column: x => x.I_Id,
+                        principalTable: "Instructors",
+                        principalColumn: "I_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseStudent_Students_S_Id",
+                        column: x => x.S_Id,
+                        principalTable: "Students",
+                        principalColumn: "S_Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "C_Id", "Description", "Name", "Number" },
@@ -122,6 +149,16 @@ namespace CourseRegistration.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CourseStudent_I_Id",
+                table: "CourseStudent",
+                column: "I_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseStudent_S_Id",
+                table: "CourseStudent",
+                column: "S_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Instructors_C_Id",
                 table: "Instructors",
                 column: "C_Id");
@@ -134,6 +171,9 @@ namespace CourseRegistration.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CourseStudent");
+
             migrationBuilder.DropTable(
                 name: "Instructors");
 

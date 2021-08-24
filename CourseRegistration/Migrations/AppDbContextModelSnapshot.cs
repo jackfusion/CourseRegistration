@@ -17,6 +17,27 @@ namespace CourseRegistration.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.9");
 
+            modelBuilder.Entity("CourseRegistration.Data.MockRepo.CourseStudent", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("I_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("S_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("I_Id");
+
+                    b.HasIndex("S_Id");
+
+                    b.ToTable("CourseStudent");
+                });
+
             modelBuilder.Entity("CourseRegistration.Models.Course", b =>
                 {
                     b.Property<int>("C_Id")
@@ -202,6 +223,25 @@ namespace CourseRegistration.Migrations
                             LastName = "Jo",
                             PhoneNumber = "2045557744"
                         });
+                });
+
+            modelBuilder.Entity("CourseRegistration.Data.MockRepo.CourseStudent", b =>
+                {
+                    b.HasOne("CourseRegistration.Models.Instructor", "Instructor")
+                        .WithMany()
+                        .HasForeignKey("I_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CourseRegistration.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("S_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Instructor");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("CourseRegistration.Models.Instructor", b =>

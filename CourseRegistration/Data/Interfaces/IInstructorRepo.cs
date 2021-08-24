@@ -14,6 +14,5 @@ namespace CourseRegistration.Data.Interfaces
         void CreateInstructor(Instructor input);
         void UpdateInstructor(Instructor input);
         bool SaveChanges();
-        void CreateInstructor(InstructorDto instructorDto);
     }
 }

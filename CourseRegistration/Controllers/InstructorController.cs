@@ -13,8 +13,8 @@ namespace CourseRegistration.Controllers
 {
     public class InstructorController : Controller
     {
-        private ICourseRepo _coursesRepo;
-        private IInstructorRepo _instructorRepo;
+        private readonly ICourseRepo _coursesRepo;
+        private readonly IInstructorRepo _instructorRepo;
         private readonly Mapper _mapper = new Mapper();
 
 
@@ -68,13 +68,13 @@ namespace CourseRegistration.Controllers
             var list = _coursesRepo.GetAllCourses()
                 .Select(i => _mapper.Map(i))
                 .ToList();
-            ViewBag.Courses = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
-            var i = _instructorRepo.GetInstructorsById(id);
+            ViewBag.Course = new SelectList(list, nameof(CourseDto.C_Id), nameof(CourseDto.Name));
+            var i = _mapper.Map(_instructorRepo.GetInstructorsById(id));
             return View(i);
         }
 
         [HttpPost]
-        public ActionResult Create(Instructor instructor)
+        public ActionResult Create(InstructorDto instructor)
         {
             _instructorRepo.CreateInstructor(_mapper.Map(instructor));
             _instructorRepo.SaveChanges();

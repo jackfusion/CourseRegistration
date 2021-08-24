@@ -1,4 +1,6 @@
-﻿using CourseRegistration.Models;
+﻿
+using CourseRegistration.Data.MockRepo;
+using CourseRegistration.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace CourseRegistration.Data.SqlRepo
         public DbSet<Student> Students { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<courseStudent> CourseStudent { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

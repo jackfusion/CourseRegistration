@@ -12,7 +12,7 @@ namespace CourseRegistration.Controllers
 {
     public class CourseController : Controller
     {
-        private ICourseRepo _courseRepo;
+        private readonly ICourseRepo _courseRepo;
         private readonly Mapper _mapper = new Mapper();
 
         public CourseController(ICourseRepo courseRepo)
