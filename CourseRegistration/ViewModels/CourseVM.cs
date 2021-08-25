@@ -7,7 +7,7 @@ namespace CourseRegistration.ViewModels
 {
     public class CourseVM
     {
-        public int C_Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }

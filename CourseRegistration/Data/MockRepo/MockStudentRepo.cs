@@ -11,13 +11,13 @@ namespace CourseRegistration.Data.MockRepo
     {
         private readonly static List<Student> _students = new List<Student>
         {
-            new Student { S_Id = 00001, FirstName = "Jim", LastName = "Black", EmailAddress = "jimblack@mail.com", PhoneNumber = "2045553344", C_Id = 001},
-            new Student { S_Id = 00002, FirstName = "Jack", LastName = "White", EmailAddress = "jackwhite@mail.com", PhoneNumber = "2045552244", C_Id = 002},
-            new Student { S_Id = 00003, FirstName = "George", LastName = "Grey", EmailAddress = "georgegrey@mail.com", PhoneNumber = "2045553322", C_Id = 003},
-            new Student { S_Id = 00004, FirstName = "Jill", LastName = "Fusion", EmailAddress = "jillfusion@mail.com", PhoneNumber = "2045554444", C_Id = 001},
-            new Student { S_Id = 00005, FirstName = "Jam", LastName = "blur", EmailAddress = "jamblur@mail.com", PhoneNumber = "2045555544", C_Id = 001},
-            new Student { S_Id = 00006, FirstName = "John", LastName = "Butt", EmailAddress = "johnbutt@mail.com", PhoneNumber = "2045556644", C_Id = 003},
-            new Student { S_Id = 00007, FirstName = "Mary", LastName = "Jo", EmailAddress = "maryjo@mail.com", PhoneNumber = "2045557744", C_Id = 002},
+            new Student { S_Id = 00001, FirstName = "Jim", LastName = "Black", EmailAddress = "jimblack@mail.com", PhoneNumber = "2045553344"},
+            new Student { S_Id = 00002, FirstName = "Jack", LastName = "White", EmailAddress = "jackwhite@mail.com", PhoneNumber = "2045552244"},
+            new Student { S_Id = 00003, FirstName = "George", LastName = "Grey", EmailAddress = "georgegrey@mail.com", PhoneNumber = "2045553322"},
+            new Student { S_Id = 00004, FirstName = "Jill", LastName = "Fusion", EmailAddress = "jillfusion@mail.com", PhoneNumber = "2045554444"},
+            new Student { S_Id = 00005, FirstName = "Jam", LastName = "blur", EmailAddress = "jamblur@mail.com", PhoneNumber = "2045555544"},
+            new Student { S_Id = 00006, FirstName = "John", LastName = "Butt", EmailAddress = "johnbutt@mail.com", PhoneNumber = "2045556644"},
+            new Student { S_Id = 00007, FirstName = "Mary", LastName = "Jo", EmailAddress = "maryjo@mail.com", PhoneNumber = "2045557744"},
 
         };
 
@@ -53,7 +53,6 @@ namespace CourseRegistration.Data.MockRepo
                 itemInTheList.LastName = input.LastName;
                 itemInTheList.EmailAddress = input.EmailAddress;
                 itemInTheList.PhoneNumber = input.PhoneNumber;
-                itemInTheList.C_Id = input.C_Id;
             }
         }
     }

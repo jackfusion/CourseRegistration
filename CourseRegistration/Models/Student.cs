@@ -18,8 +18,8 @@ namespace CourseRegistration.Models
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         //[Column(TypeName = "longtext")]
-        [ForeignKey("Course")]
-        public int? C_Id { get; set; }
-        public Course Course { get; set; }
+        //[ForeignKey("Course")]
+        //public int? C_Id { get; set; }
+        //public Course Course { get; set; }
     }
 }

@@ -86,10 +86,10 @@
 </div>
 
 <script>
-    function AddCourse(C_id) {
-        const url = "@Url.Action("GetCourseByCourseId", "Course")/" + C_id;
-        $.get(url, funcition(data){
-            
-        }
+    function AddCourse(id) {
+        const url = "@Url.Action("GetCourseByStudentId", "Course")/" + Id;
+        $.get(url, function (data) {
+            $(".modal-body").html(data);
+        });
     }
 </script>

@@ -49,7 +49,6 @@ namespace CourseRegistration.Data.SqlRepo
                 itemInTheList.LastName = input.LastName;
                 itemInTheList.EmailAddress = input.EmailAddress;
                 itemInTheList.PhoneNumber = input.PhoneNumber;
-                itemInTheList.C_Id = input.C_Id;
             };
         }
     }

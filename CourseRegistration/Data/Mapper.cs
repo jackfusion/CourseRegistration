@@ -39,8 +39,7 @@ namespace CourseRegistration.Data
                 FirstName = input.FirstName,
                 LastName = input.LastName,
                 EmailAddress = input.EmailAddress,
-                PhoneNumber = input.PhoneNumber,
-                C_Id = input.C_Id
+                PhoneNumber = input.PhoneNumber
             };
         }
 
@@ -52,9 +51,7 @@ namespace CourseRegistration.Data
                 FirstName = input.FirstName,
                 LastName = input.LastName,
                 EmailAddress = input.EmailAddress,
-                PhoneNumber = input.PhoneNumber,
-                C_Id = input.C_Id,
-                Course = Map(input.Course)
+                PhoneNumber = input.PhoneNumber
             };
         }
 

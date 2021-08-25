@@ -15,17 +15,17 @@ namespace CourseRegistration.Data.SqlRepo
         {
             _context = context;
         }
-        public void CreateCourseStudent(courseStudent input)
+        public void CreateCourseStudent(CourseStudent input)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<courseStudent> GetAllCourseStudent()
+        public IEnumerable<CourseStudent> GetAllCourseStudent()
         {
             return _context.CourseStudent.ToList();
         }
 
-        public courseStudent GetCourseStudentByID(int id)
+        public CourseStudent GetCourseStudentByID(int id)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace CourseRegistration.Data.SqlRepo
             return _context.SaveChanges() >= 0;
         }
 
-        public void UpdateCourseStudent(courseStudent input)
+        public void UpdateCourseStudent(CourseStudent input)
         {
             throw new NotImplementedException();
         }

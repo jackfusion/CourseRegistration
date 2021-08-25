@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace CourseRegistration.Data.MockRepo
 {
-    public class courseStudent
+    public class CourseStudent
     {
         [Key]
-        public int id { get; set; }
-        public Student Student { get; set; }
+        public int CS_Id { get; set; }
+        
         [ForeignKey("Student")]
         public int S_Id { get; set; }
-        [ForeignKey("Instructor")]
-        public int I_Id { get; set; }
-        public Instructor Instructor { get; set; }
+        public Student Student { get; set; }
+        [ForeignKey("Course")]
+        public int C_Id { get; set; }
+        public Course Course { get; set; }
     }
 }

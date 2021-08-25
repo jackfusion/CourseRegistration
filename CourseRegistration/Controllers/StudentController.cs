@@ -24,30 +24,30 @@ namespace CourseRegistration.Controllers
         {
             _coursesRepo = courseRepo;
             _studentRepo = studentRepo;
-            _courseStudentRepo = courseStudentRepo
+            _courseStudentRepo = courseStudentRepo;
         }
         public IActionResult Index()
         {
             var course = _coursesRepo.GetAllCourses();
-            var student = _studentRepo.GetAllStudents()
-                .Select(c =>
-                {
-                    c.Course = course.Where(s => s.C_Id == c.C_Id)
-                                       .FirstOrDefault() ?? new Models.Course
-                                       {
-                                           Name = "n/a"
-                                       };
-                    return c;
-                })
-                .Select(s => _mapper.Map(s))
-                .ToList();
+            var student = _studentRepo.GetAllStudents();
+                //.Select(c =>
+                //{
+                //    c.Course = course.Where(s => s.C_Id == c.C_Id)
+                //                       .FirstOrDefault() ?? new Models.Course
+                //                       {
+                //                           Name = "n/a"
+                //                       };
+                //    return c;
+                //})
+                //.Select(s => _mapper.Map(s))
+                //.ToList();
             return View(student);
         }
 
         public IEnumerable<string> GetStudentsByS_Id(int? id)
         {
             var result = _studentRepo.GetAllStudents()
-                .Where(c => c.C_Id == id)
+                .Where(c => c.S_Id == id)
                 .Select(c => $"{c.LastName} {c.FirstName}<br>");
 
             if (result == null || result.Count() == 0)
@@ -92,22 +92,27 @@ namespace CourseRegistration.Controllers
             _studentRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-        public ActionResult GetCourseByCourseId(int C_Id)
+        public ActionResult GetCourseByStudentId(int Id)
         {
-            var CorseStudent = _courseStudentRepo.GetAllCourseStudent();
+            var list = _courseStudentRepo.GetAllCourseStudent();
             var courses = _coursesRepo.GetAllCourses()
                 .Select(c =>
                     new CourseVM
                     {
-                        C_Id = c.C_Id,
+                        Id = c.C_Id,
                         Name = c.Name,
                         Description = c.Description,
-                        IsActive = courseStudent
-                        .Where(cs => cs.C_Id == c.C_Id && cs.S_ID == id)
+                        IsActive = list
+                        .Where(cs => cs.C_Id == c.C_Id && cs.S_Id == Id)
                         .FirstOrDefault() == null ? false : true
                     }
-                );
-            return PartialView();
+                )
+                .ToList();
+            SaveCoursesInStudentVM scs = new SaveCoursesInStudentVM { 
+                Courses = courses,
+                CS_Id = Id
+            };
+            return PartialView(scs);
         }
     }
 }

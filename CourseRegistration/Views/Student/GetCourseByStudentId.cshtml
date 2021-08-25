@@ -1,0 +1,26 @@
+﻿@model CourseRegistration.ViewModels.SaveCoursesInStudentVM
+
+@using (Html.BeginForm("SaveCourse", "Courese"))
+            {
+<table class="table">
+    @if (Model != null)
+    {
+        for (var i = 0; i < Model.Courses.Count(); ++i)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(x => Model.Courses[i].IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => Model.Courses[i].Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => Model.Courses[i].Description)
+                </td>
+            </tr>
+            @Html.HiddenFor(mi => Model.Courses[i].Id)
+        }
+        @Html.HiddenFor(mi => Model.CS_Id)
+    }
+</table>
+            }
