@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseRegistration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210824222802_FixRelationship")]
-    partial class FixRelationship
+    [Migration("20210825010454_UpdateInstructors")]
+    partial class UpdateInstructors
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,21 +21,21 @@ namespace CourseRegistration.Migrations
 
             modelBuilder.Entity("CourseRegistration.Data.MockRepo.CourseStudent", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CS_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("C_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("S_Id")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CS_Id");
 
                     b.HasIndex("C_Id");
 
-                    b.HasIndex("S_Id");
+                    b.HasIndex("Id");
 
                     b.ToTable("CourseStudent");
                 });
@@ -136,7 +136,7 @@ namespace CourseRegistration.Migrations
 
             modelBuilder.Entity("CourseRegistration.Models.Student", b =>
                 {
-                    b.Property<int>("S_Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -152,7 +152,7 @@ namespace CourseRegistration.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");
 
-                    b.HasKey("S_Id");
+                    b.HasKey("Id");
 
                     b.ToTable("Students");
 
@@ -225,7 +225,7 @@ namespace CourseRegistration.Migrations
 
                     b.HasOne("CourseRegistration.Models.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("S_Id")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

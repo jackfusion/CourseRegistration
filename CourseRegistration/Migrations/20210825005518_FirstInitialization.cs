@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CourseRegistration.Migrations
 {
-    public partial class firstInilization : Migration
+    public partial class FirstInitialization : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,6 +25,27 @@ namespace CourseRegistration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.C_Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    S_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EmailAddress = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.S_Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -55,50 +76,22 @@ namespace CourseRegistration.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    S_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    EmailAddress = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PhoneNumber = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    C_Id = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.S_Id);
-                    table.ForeignKey(
-                        name: "FK_Students_Courses_C_Id",
-                        column: x => x.C_Id,
-                        principalTable: "Courses",
-                        principalColumn: "C_Id",
-                        onDelete: ReferentialAction.Restrict);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "CourseStudent",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    CS_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     S_Id = table.Column<int>(type: "int", nullable: false),
-                    I_Id = table.Column<int>(type: "int", nullable: false)
+                    C_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseStudent", x => x.id);
+                    table.PrimaryKey("PK_CourseStudent", x => x.CS_Id);
                     table.ForeignKey(
-                        name: "FK_CourseStudent_Instructors_I_Id",
-                        column: x => x.I_Id,
-                        principalTable: "Instructors",
-                        principalColumn: "I_Id",
+                        name: "FK_CourseStudent_Courses_C_Id",
+                        column: x => x.C_Id,
+                        principalTable: "Courses",
+                        principalColumn: "C_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CourseStudent_Students_S_Id",
@@ -112,46 +105,41 @@ namespace CourseRegistration.Migrations
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "C_Id", "Description", "Name", "Number" },
-                values: new object[] { 1, "Math", "Math", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Courses",
-                columns: new[] { "C_Id", "Description", "Name", "Number" },
-                values: new object[] { 2, "Teach Web Development", "Computers", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Courses",
-                columns: new[] { "C_Id", "Description", "Name", "Number" },
-                values: new object[] { 3, "Gym", "Gym", 3 });
+                values: new object[,]
+                {
+                    { 1, "Math", "Math", 1 },
+                    { 2, "Teach Web Development", "Computers", 2 },
+                    { 3, "Gym", "Gym", 3 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Instructors",
                 columns: new[] { "I_Id", "C_Id", "EmailAddress", "FirstName", "LastName" },
                 values: new object[,]
                 {
-                    { 1, 1, "jacksmith@mail.com", "Jack", "Smith" },
-                    { 2, 2, "luckhairy@mail.com", "Luck", "Hairy" },
-                    { 3, 3, "darrickdark@mail.com", "Darrick", "Dark" }
+                    { 1, null, "jacksmith@mail.com", "Jack", "Smith" },
+                    { 2, null, "luckhairy@mail.com", "Luck", "Hairy" },
+                    { 3, null, "darrickdark@mail.com", "Darrick", "Dark" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Students",
-                columns: new[] { "S_Id", "C_Id", "EmailAddress", "FirstName", "LastName", "PhoneNumber" },
+                columns: new[] { "S_Id", "EmailAddress", "FirstName", "LastName", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 1, 1, "jimblack@mail.com", "Jim", "Black", "2045553344" },
-                    { 4, 1, "jillfusion@mail.com", "Jill", "Fusion", "2045554444" },
-                    { 5, 1, "jamblur@mail.com", "Jam", "blur", "2045555544" },
-                    { 2, 2, "jackwhite@mail.com", "Jack", "White", "2045552244" },
-                    { 7, 2, "maryjo@mail.com", "Mary", "Jo", "2045557744" },
-                    { 3, 3, "georgegrey@mail.com", "George", "Grey", "2045553322" },
-                    { 6, 3, "johnbutt@mail.com", "John", "Butt", "2045556644" }
+                    { 1, "jimblack@mail.com", "Jim", "Black", "2045553344" },
+                    { 2, "jackwhite@mail.com", "Jack", "White", "2045552244" },
+                    { 3, "georgegrey@mail.com", "George", "Grey", "2045553322" },
+                    { 4, "jillfusion@mail.com", "Jill", "Fusion", "2045554444" },
+                    { 5, "jamblur@mail.com", "Jam", "blur", "2045555544" },
+                    { 6, "johnbutt@mail.com", "John", "Butt", "2045556644" },
+                    { 7, "maryjo@mail.com", "Mary", "Jo", "2045557744" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseStudent_I_Id",
+                name: "IX_CourseStudent_C_Id",
                 table: "CourseStudent",
-                column: "I_Id");
+                column: "C_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseStudent_S_Id",
@@ -161,11 +149,6 @@ namespace CourseRegistration.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Instructors_C_Id",
                 table: "Instructors",
-                column: "C_Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_C_Id",
-                table: "Students",
                 column: "C_Id");
         }
 

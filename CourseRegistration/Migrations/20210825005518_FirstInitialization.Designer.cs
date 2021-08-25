@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseRegistration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210824010706_firstInilization")]
-    partial class firstInilization
+    [Migration("20210825005518_FirstInitialization")]
+    partial class FirstInitialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,21 +21,21 @@ namespace CourseRegistration.Migrations
 
             modelBuilder.Entity("CourseRegistration.Data.MockRepo.CourseStudent", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("CS_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("I_Id")
+                    b.Property<int>("C_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("S_Id")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("CS_Id");
 
-                    b.HasIndex("I_Id");
+                    b.HasIndex("C_Id");
 
-                    b.HasIndex("S_Id");
+                    b.HasIndex("Id");
 
                     b.ToTable("CourseStudent");
                 });
@@ -111,7 +111,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             I_Id = 1,
-                            C_Id = 1,
                             EmailAddress = "jacksmith@mail.com",
                             FirstName = "Jack",
                             LastName = "Smith"
@@ -119,7 +118,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             I_Id = 2,
-                            C_Id = 2,
                             EmailAddress = "luckhairy@mail.com",
                             FirstName = "Luck",
                             LastName = "Hairy"
@@ -127,7 +125,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             I_Id = 3,
-                            C_Id = 3,
                             EmailAddress = "darrickdark@mail.com",
                             FirstName = "Darrick",
                             LastName = "Dark"
@@ -136,11 +133,8 @@ namespace CourseRegistration.Migrations
 
             modelBuilder.Entity("CourseRegistration.Models.Student", b =>
                 {
-                    b.Property<int>("S_Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("C_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("EmailAddress")
@@ -155,9 +149,7 @@ namespace CourseRegistration.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");
 
-                    b.HasKey("S_Id");
-
-                    b.HasIndex("C_Id");
+                    b.HasKey("Id");
 
                     b.ToTable("Students");
 
@@ -165,7 +157,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 1,
-                            C_Id = 1,
                             EmailAddress = "jimblack@mail.com",
                             FirstName = "Jim",
                             LastName = "Black",
@@ -174,7 +165,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 2,
-                            C_Id = 2,
                             EmailAddress = "jackwhite@mail.com",
                             FirstName = "Jack",
                             LastName = "White",
@@ -183,7 +173,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 3,
-                            C_Id = 3,
                             EmailAddress = "georgegrey@mail.com",
                             FirstName = "George",
                             LastName = "Grey",
@@ -192,7 +181,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 4,
-                            C_Id = 1,
                             EmailAddress = "jillfusion@mail.com",
                             FirstName = "Jill",
                             LastName = "Fusion",
@@ -201,7 +189,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 5,
-                            C_Id = 1,
                             EmailAddress = "jamblur@mail.com",
                             FirstName = "Jam",
                             LastName = "blur",
@@ -210,7 +197,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 6,
-                            C_Id = 3,
                             EmailAddress = "johnbutt@mail.com",
                             FirstName = "John",
                             LastName = "Butt",
@@ -219,7 +205,6 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             S_Id = 7,
-                            C_Id = 2,
                             EmailAddress = "maryjo@mail.com",
                             FirstName = "Mary",
                             LastName = "Jo",
@@ -229,33 +214,24 @@ namespace CourseRegistration.Migrations
 
             modelBuilder.Entity("CourseRegistration.Data.MockRepo.CourseStudent", b =>
                 {
-                    b.HasOne("CourseRegistration.Models.Instructor", "Instructor")
+                    b.HasOne("CourseRegistration.Models.Course", "Course")
                         .WithMany()
-                        .HasForeignKey("I_Id")
+                        .HasForeignKey("C_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CourseRegistration.Models.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("S_Id")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Instructor");
+                    b.Navigation("Course");
 
                     b.Navigation("Student");
                 });
 
             modelBuilder.Entity("CourseRegistration.Models.Instructor", b =>
-                {
-                    b.HasOne("CourseRegistration.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("C_Id");
-
-                    b.Navigation("Course");
-                });
-
-            modelBuilder.Entity("CourseRegistration.Models.Student", b =>
                 {
                     b.HasOne("CourseRegistration.Models.Course", "Course")
                         .WithMany()

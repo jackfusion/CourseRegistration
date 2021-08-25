@@ -57,7 +57,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.S_Id }) | 
-                <a href+"#" data-toggle="modal" data-target="#exampleModal" onclick="AddCourse(@item.C_Id)">Add/Remove courses</a>
+                <a href="#" data-toggle="modal" data-target="#exampleModal" onclick="AddCourse(@item.C_Id)">Add/Remove courses</a>
                 @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
@@ -87,8 +87,11 @@
 
 <script>
     function AddCourse(id) {
-        const url = "@Url.Action("GetCourseByStudentId", "Course")/" + Id;
+        console.log(id);
+        const url = "@Url.Action("GetCourseByStudentId", "Course")/" + id;
+        //console.log(url);
         $.get(url, function (data) {
+            //console.log(data)
             $(".modal-body").html(data);
         });
     }

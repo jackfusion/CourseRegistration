@@ -29,7 +29,7 @@ namespace CourseRegistration.Controllers
         public IActionResult Index()
         {
             var course = _coursesRepo.GetAllCourses();
-            var student = _studentRepo.GetAllStudents();
+            var student = _studentRepo.GetAllStudents()
                 //.Select(c =>
                 //{
                 //    c.Course = course.Where(s => s.C_Id == c.C_Id)
@@ -39,8 +39,8 @@ namespace CourseRegistration.Controllers
                 //                       };
                 //    return c;
                 //})
-                //.Select(s => _mapper.Map(s))
-                //.ToList();
+                .Select(s => _mapper.Map(s))
+                .ToList();
             return View(student);
         }
 
