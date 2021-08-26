@@ -13,5 +13,7 @@ namespace CourseRegistration.Data.Interfaces
         void CreateCourseStudent(CourseStudent input);
         void UpdateCourseStudent(CourseStudent input);
         bool SaveChanges();
+        void RemoveRange(int CS_ID);
+        void AddRange(IEnumerable<CourseStudent> range);
     }
 }

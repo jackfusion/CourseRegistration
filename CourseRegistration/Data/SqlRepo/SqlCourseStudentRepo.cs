@@ -15,6 +15,7 @@ namespace CourseRegistration.Data.SqlRepo
         {
             _context = context;
         }
+
         public void CreateCourseStudent(CourseStudent input)
         {
             throw new NotImplementedException();
@@ -38,6 +39,18 @@ namespace CourseRegistration.Data.SqlRepo
         public void UpdateCourseStudent(CourseStudent input)
         {
             throw new NotImplementedException();
+        }
+
+        public void AddRange(IEnumerable<CourseStudent> range)
+        {
+            _context.AddRange(range);
+        }
+
+        public void RemoveRange(int CS_ID)
+        {
+            var rangeToRemove = _context.CourseStudent
+                .Where(cs => cs.C_Id == CS_ID);
+            _context.RemoveRange(rangeToRemove);
         }
     }
 }

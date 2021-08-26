@@ -114,5 +114,21 @@ namespace CourseRegistration.Controllers
             };
             return PartialView(scs);
         }
+
+        public ActionResult SaveCourse(SaveCoursesInStudentVM obj)
+        {
+            _courseStudentRepo.RemoveRange(obj.CS_Id);
+            var toAdd = obj.Courses
+                .Where(c => c.IsActive)
+                .Select(cs => new CourseStudent
+                {
+                    CS_Id = obj.CS_Id,
+                    C_Id = cs.Id
+                });
+
+            _courseStudentRepo.AddRange(toAdd);
+            _courseStudentRepo.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
