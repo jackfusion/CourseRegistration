@@ -110,19 +110,19 @@ namespace CourseRegistration.Controllers
                 .ToList();
             SaveCoursesInStudentVM scs = new SaveCoursesInStudentVM { 
                 Courses = courses,
-                CS_Id = Id
+                S_Id = Id
             };
             return PartialView(scs);
         }
 
         public ActionResult SaveCourse(SaveCoursesInStudentVM obj)
         {
-            _courseStudentRepo.RemoveRange(obj.CS_Id);
+            _courseStudentRepo.RemoveRange(obj.S_Id);
             var toAdd = obj.Courses
                 .Where(c => c.IsActive)
                 .Select(cs => new CourseStudent
                 {
-                    CS_Id = obj.CS_Id,
+                    S_Id = obj.S_Id,
                     C_Id = cs.Id
                 });
 

@@ -46,10 +46,10 @@ namespace CourseRegistration.Data.SqlRepo
             _context.AddRange(range);
         }
 
-        public void RemoveRange(int CS_ID)
+        public void RemoveRange(int S_ID)
         {
             var rangeToRemove = _context.CourseStudent
-                .Where(cs => cs.C_Id == CS_ID);
+                .Where(cs => cs.S_Id == S_ID);
             _context.RemoveRange(rangeToRemove);
         }
     }

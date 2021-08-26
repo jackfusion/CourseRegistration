@@ -1,6 +1,6 @@
 ﻿@model CourseRegistration.ViewModels.SaveCoursesInStudentVM
 
-@using (Html.BeginForm("SaveCourse", "Courese"))
+@using (Html.BeginForm("SaveCourse", "Student"))
             {
 <table class="table">
     @if (Model != null)
@@ -20,7 +20,7 @@
             </tr>
             @Html.HiddenFor(mi => Model.Courses[i].Id)
         }
-        @Html.HiddenFor(mi => Model.CS_Id)
+        @Html.HiddenFor(mi => Model.S_Id)
     }
 </table>
 <button type="submit" class="btn btn-primary">Save changes</button>

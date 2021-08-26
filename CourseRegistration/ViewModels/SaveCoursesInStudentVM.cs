@@ -8,6 +8,6 @@ namespace CourseRegistration.ViewModels
     public class SaveCoursesInStudentVM
     {
         public List<CourseVM> Courses { get; set; }
-        public int CS_Id { get; set; }
+        public int S_Id { get; set; }
     }
 }
