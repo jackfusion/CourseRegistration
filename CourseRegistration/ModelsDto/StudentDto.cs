@@ -20,12 +20,15 @@ namespace CourseRegistration.ModelsDto
         [Required]
         public string LastName { get; set; }
         [DisplayName("Email Address")]
+        [EmailAddress]
         public string EmailAddress { get; set; }
         [DisplayName("Phone Number")]
         [Required]
+        [Phone]
         public string PhoneNumber { get; set; }
-        [DisplayName("Course ID")]
-        public int? C_Id { get; set; }
-        public CourseDto Course { get; set; }
+        //[DisplayName("Course ID")]
+
+        //public int? C_Id { get; set; }
+        //public CourseDto Course { get; set; }
     }
 }

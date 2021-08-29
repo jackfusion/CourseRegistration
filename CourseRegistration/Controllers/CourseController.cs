@@ -47,9 +47,13 @@ namespace CourseRegistration.Controllers
         [HttpPost]
         public ActionResult Edit(CourseDto course)
         {
+            if(ModelState.IsValid)
+            { 
             _courseRepo.UpdateCourse(_mapper.Map(course));
             _courseRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
+            }
+            return View (course);
         }
     }
 }

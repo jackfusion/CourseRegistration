@@ -80,9 +80,13 @@ namespace CourseRegistration.Controllers
         [HttpPost]
         public ActionResult Create(StudentDto student)
         {
-            _studentRepo.CreateStudent(_mapper.Map(student));
-            _studentRepo.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                _studentRepo.CreateStudent(_mapper.Map(student));
+                _studentRepo.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(student);
         }
 
         [HttpPost]
